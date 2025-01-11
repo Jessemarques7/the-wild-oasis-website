@@ -1,9 +1,12 @@
 import Link from "next/link";
 import ReservationCard from "@/app/_components/ReservationCard";
+import { getBookings } from "@/app/_lib/data-service";
+import { auth } from "@/app/_lib/auth";
 
-export default function Page() {
+export default async function Page() {
+  const session = await auth();
   // CHANGE
-  const bookings = [];
+  const bookings = await getBookings(session.user.guestId);
 
   return (
     <div>
