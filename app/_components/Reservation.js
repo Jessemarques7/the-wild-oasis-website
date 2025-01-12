@@ -4,12 +4,11 @@ import DateSelector from "./DateSelector";
 import LoginMessage from "./LoginMessage";
 import ReservationForm from "./ReservationForm";
 
-export default async function Reservation({ cabin }) {
-  const { settings, bookedDates } = await Promise.all([
+async function Reservation({ cabin }) {
+  const [settings, bookedDates] = await Promise.all([
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
   ]);
-
   const session = await auth();
 
   return (
@@ -27,3 +26,5 @@ export default async function Reservation({ cabin }) {
     </div>
   );
 }
+
+export default Reservation;
